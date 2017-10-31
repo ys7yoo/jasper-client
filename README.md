@@ -1,3 +1,10 @@
+
+Converting for Python 3.
+
+Below comes from the original authors.
+
+
+
 jasper-client
 =============
 
