@@ -16,7 +16,7 @@ import pipes
 import logging
 import wave
 import urllib
-import urlparse
+#import urlparse
 import requests
 from abc import ABCMeta, abstractmethod
 
@@ -38,8 +38,8 @@ try:
 except ImportError:
     pass
 
-import diagnose
-import jasperpath
+from . import diagnose
+from . import jasperpath
 
 
 class AbstractTTSEngine(object):
@@ -99,8 +99,8 @@ class AbstractMp3TTSEngine(AbstractTTSEngine):
             wav = wave.open(f, mode='wb')
             wav.setframerate(mf.samplerate())
             wav.setnchannels(1 if mf.mode() == mad.MODE_SINGLE_CHANNEL else 2)
-            # 4L is the sample width of 32 bit audio
-            wav.setsampwidth(4L)
+            # 4 is the sample width of 32 bit audio
+            wav.setsampwidth(4)
             frame = mf.read()
             while frame is not None:
                 wav.writeframes(frame)
@@ -653,13 +653,15 @@ def get_engine_by_slug(slug=None):
 
     selected_engines = filter(lambda engine: hasattr(engine, "SLUG") and
                               engine.SLUG == slug, get_engines())
-    if len(selected_engines) == 0:
+    list_selected_engines = list(selected_engines)
+
+    if len(list_selected_engines) == 0:
         raise ValueError("No TTS engine found for slug '%s'" % slug)
     else:
-        if len(selected_engines) > 1:
+        if len(list_selected_engines) > 1:
             print("WARNING: Multiple TTS engines found for slug '%s'. " +
                   "This is most certainly a bug." % slug)
-        engine = selected_engines[0]
+        engine = list_selected_engines[0]
         if not engine.is_available():
             raise ValueError(("TTS engine '%s' is not available (due to " +
                               "missing dependencies, etc.)") % slug)

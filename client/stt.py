@@ -6,15 +6,15 @@ import json
 import tempfile
 import logging
 import urllib
-import urlparse
+#import urlparse
 import re
 import subprocess
 from abc import ABCMeta, abstractmethod
-import requests
+#import requests
 import yaml
-import jasperpath
-import diagnose
-import vocabcompiler
+from . import jasperpath
+from . import diagnose
+from . import vocabcompiler
 
 
 class AbstractSTTEngine(object):
@@ -635,13 +635,23 @@ def get_engine_by_slug(slug=None):
 
     selected_engines = filter(lambda engine: hasattr(engine, "SLUG") and
                               engine.SLUG == slug, get_engines())
-    if len(selected_engines) == 0:
+    #print("selected engines")
+    #print(list(selected_engines))
+    list_selected_engines = list(selected_engines)
+    print(list_selected_engines)
+    #len_selected_engines = len(list(selected_engines))
+    #print(len_selected_engines)
+    # len issue: https://stackoverflow.com/questions/24291604/find-the-length-of-a-filter-object-in-python-3
+    if len(list_selected_engines) == 0:
         raise ValueError("No STT engine found for slug '%s'" % slug)
     else:
-        if len(selected_engines) > 1:
+        if len(list_selected_engines) > 1:
             print(("WARNING: Multiple STT engines found for slug '%s'. " +
                    "This is most certainly a bug.") % slug)
-        engine = selected_engines[0]
+        #engine = selected_engines[0]
+        # https://stackoverflow.com/questions/15876259/typeerror-filter-object-is-not-subscriptable
+        engine = list_selected_engines[0]
+        print(engine.is_available())
         if not engine.is_available():
             raise ValueError(("STT engine '%s' is not available (due to " +
                               "missing dependencies, missing " +

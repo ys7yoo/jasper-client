@@ -16,10 +16,10 @@ import shutil
 from abc import ABCMeta, abstractmethod, abstractproperty
 import yaml
 
-import brain
-import jasperpath
-
-from g2p import PhonetisaurusG2P
+from . import brain
+from . import jasperpath
+from . import g2p
+# from g2p import PhonetisaurusG2P
 try:
     import cmuclmtk
 except ImportError:

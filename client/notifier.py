@@ -1,7 +1,13 @@
 # -*- coding: utf-8-*-
-import Queue
+#import Queue
+try:
+    import Queue as queue
+except ImportError:
+    import queue
+
 import atexit
-from modules import Gmail
+from . import modules
+#from modules import Gmail
 from apscheduler.schedulers.background import BackgroundScheduler
 import logging
 
