@@ -7,10 +7,11 @@ import tempfile
 import logging
 import urllib
 #import urlparse
+import urllib.parse
 import re
 import subprocess
 from abc import ABCMeta, abstractmethod
-#import requests
+import requests
 import yaml
 from . import jasperpath
 from . import diagnose
@@ -339,13 +340,13 @@ class GoogleSTT(AbstractSTTEngine):
 
     def _regenerate_request_url(self):
         if self.api_key and self.language:
-            query = urllib.urlencode({'output': 'json',
+            query = urllib.parse.urlencode({'output': 'json',  # https://stackoverflow.com/questions/28906859/module-has-no-attribute-urlencode
                                       'client': 'chromium',
                                       'key': self.api_key,
                                       'lang': self.language,
                                       'maxresults': 6,
                                       'pfilter': 2})
-            self._request_url = urlparse.urlunparse(
+            self._request_url = urllib.parse.urlunparse(
                 ('https', 'www.google.com', '/speech-api/v2/recognize', '',
                  query, ''))
         else:
