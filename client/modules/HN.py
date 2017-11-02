@@ -6,15 +6,15 @@ try:
     from urllib.request import urlopen
 except ImportError:
     # Fall back to Python 2's urllib2
-    from urllib2 import urlopen
+    from urllib.request import urlopen
 
 
 import re
 import random
 from bs4 import BeautifulSoup
 from client import app_utils
-#from semantic.numbers import NumberService
-from semantic_version.numbers import NumberService
+from semantic.numbers import NumberService
+#from semantic_version.numbers import NumberService
 
 WORDS = ["HACKER", "NEWS", "YES", "NO", "FIRST", "SECOND", "THIRD"]
 
@@ -38,11 +38,11 @@ def getTopStories(maxResults=None):
         maxResults -- if provided, returns a random sample of size maxResults
     """
     hdr = {'User-Agent': 'Mozilla/5.0'}
-    req = urllib2.Request(URL, headers=hdr)
-    page = urllib2.urlopen(req).read()
+    req = urllib.request.Request(URL, headers=hdr)
+    page = urllib.request.urlopen(req).read()
     soup = BeautifulSoup(page)
     matches = soup.findAll('td', class_="title")
-    matches = [m.a for m in matches if m.a and m.text != u'More']
+    matches = [m.a for m in matches if m.a and m.text != 'More']
     matches = [HNStory(m.text, m['href']) for m in matches]
 
     if maxResults:
