@@ -1,7 +1,12 @@
 # -*- coding: utf-8-*-
 import smtplib
-from email.MIMEText import MIMEText
-import urllib2
+#from email.MIMEText import MIMEText
+#https://stackoverflow.com/questions/6971085/import-error-in-python
+from email.mime.text import MIMEText
+
+#import urllib2
+
+
 import re
 from pytz import timezone
 

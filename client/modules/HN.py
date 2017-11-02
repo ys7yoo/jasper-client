@@ -1,10 +1,20 @@
 # -*- coding: utf-8-*-
-import urllib2
+#import urllib2
+# https://stackoverflow.com/questions/2792650/python3-error-import-error-no-module-name-urllib2
+try:
+    # For Python 3.0 and later
+    from urllib.request import urlopen
+except ImportError:
+    # Fall back to Python 2's urllib2
+    from urllib2 import urlopen
+
+
 import re
 import random
 from bs4 import BeautifulSoup
 from client import app_utils
-from semantic.numbers import NumberService
+#from semantic.numbers import NumberService
+from semantic_version.numbers import NumberService
 
 WORDS = ["HACKER", "NEWS", "YES", "NO", "FIRST", "SECOND", "THIRD"]
 

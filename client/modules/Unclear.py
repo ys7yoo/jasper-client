@@ -1,11 +1,14 @@
 # -*- coding: utf-8-*-
-from sys import maxint
+# from sys import maxint
+from sys import maxsize
+# https://stackoverflow.com/questions/13795758/what-is-sys-maxint-in-python-3
+
 import random
 
 WORDS = []
 
-PRIORITY = -(maxint + 1)
-
+#PRIORITY = -(maxint + 1)
+PRIORITY = -(maxsize + 1)
 
 def handle(text, mic, profile):
     """
