@@ -3,6 +3,11 @@ Converting for Python 3.
 
 Below comes from the original authors.
 
+You can launch Jasper using the following command.
+```bash
+python3 jasper3.py
+```
+
 
 
 jasper-client
