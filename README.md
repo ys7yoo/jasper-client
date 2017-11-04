@@ -1,12 +1,18 @@
 
 Converting for Python 3.
 
-Below comes from the original authors.
+Install required packages
+```bash
+sudo pip3 install --upgrade -r client/requirements.txt 
+```
 
 You can launch Jasper using the following command.
 ```bash
 python3 jasper3.py
 ```
+
+
+Below comes from the original authors.
 
 
 
